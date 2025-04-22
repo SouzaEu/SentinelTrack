@@ -3,9 +3,9 @@
 Sistema de Monitoramento e Rastreamento de Incidentes
 
 ## Equipe
-- Thomaz - RM555323
-- Vinicius - RM556089
-- Gabriel - RM556972
+- Vinicius Souza Carvalho - RM556089
+- Thomaz Oliveira vilas boas bartol - RM555323
+- Gabriel Duarte - RM556972
 
 ## Descrição do Projeto
 O SentinelTrack é um sistema de monitoramento e rastreamento de incidentes que permite o gerenciamento eficiente de ocorrências em diferentes locais. O sistema oferece funcionalidades para cadastro de usuários, locais, ativos e incidentes, além de alertas e relatórios.
