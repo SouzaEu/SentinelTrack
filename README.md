@@ -36,7 +36,7 @@ cd sentineltrack
 ```
 
 ### 2. Configuração do Banco de Dados
-1. Acesse o Oracle SQL Developer ou outro cliente SQL
+1. Acesse o Oracle SQL Developer
 2. Execute o script SQL localizado em `src/main/resources/db/script.sql`
 
 ### 3. Configuração do Projeto
