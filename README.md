@@ -31,7 +31,7 @@ O SentinelTrack é um sistema de monitoramento e rastreamento de incidentes que 
 
 ### 1. Clone o Repositório
 ```bash
-git clone https://github.com/seu-usuario/sentineltrack.git
+git clone https://github.com/SouzaEu/sentineltrack.git
 cd sentineltrack
 ```
 
