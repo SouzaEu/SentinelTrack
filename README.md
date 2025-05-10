@@ -37,13 +37,7 @@ cd sentineltrack
 
 ### 2. Configuração do Banco de Dados
 1. Acesse o Oracle SQL Developer ou outro cliente SQL
-2. Conecte-se ao banco de dados usando as credenciais:
-   - Host: oracle.fiap.com.br
-   - Port: 1521
-   - SID: ORCL
-   - Usuário: RM556089
-   - Senha: 290305
-3. Execute o script SQL localizado em `src/main/resources/db/script.sql`
+2. Execute o script SQL localizado em `src/main/resources/db/script.sql`
 
 ### 3. Configuração do Projeto
 1. Abra o arquivo `src/main/resources/application.properties`
