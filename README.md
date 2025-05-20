@@ -74,25 +74,15 @@ mvn verify
 
 ## Estrutura do Projeto
 ```
-src/
-├── main/
-│   ├── java/
-│   │   └── br/com/fiap/sentineltrack/
-│   │       ├── controller/    # Controladores REST
-│   │       ├── service/       # Lógica de negócios
-│   │       ├── repository/    # Repositórios JPA
-│   │       ├── entity/        # Entidades JPA
-│   │       ├── dto/          # Objetos de transferência de dados
-│   │       ├── exception/    # Tratamento de exceções
-│   │       └── config/       # Configurações do Spring
-│   └── resources/
-│       ├── application.properties
-│       └── db/
-│           └── script.sql
-└── test/
-    └── java/
-        └── br/com/fiap/sentineltrack/
-            └── service/      # Testes unitários
+
+controller/ # Controladores REST
+service/    # Lógica de negócios
+repository/ # Repositórios JPA
+entity/     # Entidades JPA
+dto/        # Objetos de transferência de dados
+exception/  # Tratamento de exceções
+config/     # Configurações do Spring
+service/    # Testes unitários
 ```
 
 ## Funcionalidades
