@@ -1,118 +1,109 @@
-# SentinelTrack
 
-Sistema de Monitoramento e Rastreamento de Incidentes
+# 🛠️ SentinelTrack - API de Usuários
 
-## Equipe
+Este projeto faz parte do ecossistema da solução **SentinelTrack**, voltada para controle e rastreamento de motocicletas em pátios via IoT. Este serviço é responsável pelo **gerenciamento de usuários**, incluindo operações de CRUD com suporte a Swagger para documentação da API.
+
+---
+
+## 📦 Tecnologias Utilizadas
+
+- **Java 17**
+- **Spring Boot**
+- **Spring Web**
+- **Spring Data JPA**
+- **OpenAPI (Swagger)**
+- **OracleDB**
+- **Lombok**
+- **Maven**
+
+---
+
+## 🔁 Funcionalidades da API
+
+A API permite:
+
+- 🔍 Listar todos os usuários
+- 🔍 Buscar usuário por:
+  - `ID` (UUID)
+  - `RM` (registro)
+  - `Nome`
+- ➕ Cadastrar um novo usuário
+- ✏️ Atualizar um usuário existente
+- ❌ Remover usuário por:
+  - `ID`
+  - `RM`
+
+---
+
+## 🔓 Endpoints para Testar
+
+| Método | Endpoint                                | Descrição                         |
+|--------|-----------------------------------------|-----------------------------------|
+| GET    | `/users?page=0&size=5&sort=name,asc`    | Lista todos os usuários paginados |
+| GET    | `/bikes?page=0&size=5&sortBy=plate`     | Lista todos as motos paginadas    |
+
+
+*Lembrar de acessar a porta 8080 ao se conectar aos endpoints!*
+
+
+
+> Todas as rotas estão documentadas no Swagger UI.
+
+---
+
+## 📄 Documentação Swagger
+
+A documentação interativa estará disponível em:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+### Pré-requisitos
+
+- Java 17+
+- Maven
+- Banco de dados PostgreSQL (ou compatível)
+
+### Rodando localmente
+
+```bash
+# Clone o repositório
+git clone https://github.com/SouzaEu/SentinelTrack
+cd SentinelTrack
+
+# Compilar e rodar
+./mvnw spring-boot:run
+```
+
+---
+
+## 🧑‍💻 Participantes
+
+- Thomaz Oliveira Vilas Boas Bartol - RM555323
 - Vinicius Souza Carvalho - RM556089
-- Thomaz Oliveira vilas boas bartol - RM555323
 - Gabriel Duarte - RM556972
 
-## Descrição do Projeto
-O SentinelTrack é um sistema de monitoramento e rastreamento de incidentes que permite o gerenciamento eficiente de ocorrências em diferentes locais. O sistema oferece funcionalidades para cadastro de usuários, locais, ativos e incidentes, além de alertas e relatórios.
+---
 
-## Tecnologias Utilizadas
-- Java 17
-- Spring Boot 3.2.3
-- Spring Data JPA
-- Oracle Database
-- Maven
-- Lombok
-- Swagger/OpenAPI
-- JUnit 5
-- Mockito
+## 📁 Estrutura do Projeto
 
-## Requisitos
-- JDK 17 ou superior
-- Maven 3.6 ou superior
-- Oracle Database 19c ou superior
-- Git
-
-## Configuração do Ambiente
-
-### 1. Clone o Repositório
-```bash
-git clone https://github.com/SouzaEu/sentineltrack.git
-cd sentineltrack
+```
+src/
+├── controllers/        # Camada REST (UserController)
+├── services/           # Camada de negócio (UserService)
+├── models/             # Entidades e DTOs
+└── repositories/       # Interface de persistência
 ```
 
-### 2. Configuração do Banco de Dados
-1. Acesse o Oracle SQL Developer
-2. Execute o script SQL localizado em `src/main/resources/db/script.sql`
+---
 
-### 3. Configuração do Projeto
-1. Abra o arquivo `src/main/resources/application.properties`
-2. Verifique se as configurações do banco de dados estão corretas
-3. Ajuste outras configurações conforme necessário
+## 📬 Contato
 
-## Executando o Projeto
+Em caso de dúvidas, entre em contato via [rm556089@fiap.com.br] (GitHub).
 
-### 1. Compilação
-```bash
-mvn clean install
-```
-
-### 2. Execução
-```bash
-mvn spring-boot:run
-```
-
-### 3. Acessando a API
-- Documentação Swagger: http://localhost:8080/swagger-ui.html
-- API Base URL: http://localhost:8080/api
-
-## Testes
-
-### Executando os Testes
-```bash
-mvn test
-```
-
-### Cobertura de Testes
-```bash
-mvn verify
-```
-
-## Estrutura do Projeto
-```
-
-controller/ # Controladores REST
-service/    # Lógica de negócios
-repository/ # Repositórios JPA
-entity/     # Entidades JPA
-dto/        # Objetos de transferência de dados
-exception/  # Tratamento de exceções
-config/     # Configurações do Spring
-service/    # Testes unitários
-```
-
-## Funcionalidades
-- CRUD completo de Usuários, Locais, Ativos e Incidentes
-- Relacionamentos entre entidades
-- Validação de campos com Bean Validation
-- Paginação e ordenação de resultados
-- Cache para otimização de requisições
-- Documentação Swagger/OpenAPI
-- Tratamento centralizado de erros
-- Testes unitários
-
-## Endpoints Principais
-- `/api/usuarios` - Gerenciamento de usuários
-- `/api/locais` - Gerenciamento de locais
-- `/api/ativos` - Gerenciamento de ativos
-- `/api/incidentes` - Gerenciamento de incidentes
-- `/api/alertas` - Gerenciamento de alertas
-
-## Contribuição
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Faça commit das alterações (`git commit -m 'Adiciona nova feature'`)
-4. Faça push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-## Licença
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## Scripts PL/SQL
-O projeto inclui dois blocos PL/SQL:
-1. Análise de incidentes por local com agrupamento
-2. Análise de severidade de incidentes com referência a linhas anteriores/próximas
+---
