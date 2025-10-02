@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Tarefa</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${user.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h1>
+
+    <form th:action="@{/users/save}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <label>RM:</label>
+        <input type="text" th:field="*{rm}"/>
+        <span class="error" th:if="${#fields.hasErrors('rm')}" th:errors="*{rm}"></span>
+
+        <label>Nome:</label>
+        <textarea th:field="*{name}"></textarea>
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+
+        <label>Senha:</label>
+        <input type="password" th:field="*{password}"/>
+        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+        <div>
+            <button type="button" onclick="confirmarEnvio()">Salvar</button>
+            <a th:href="@{/users}">Voltar</a>
+        </div>
+    </form>
+</div>
+
+<div id="toast" class="toast-hidden" th:text="${param.success} ?: ''"></div>
+
+<div id="dialog-overlay" style="display:none;"></div>
+<div id="custom-dialog" style="display:none;">
+    <div class="dialog-content">
+        <p id="dialog-message">Você tem certeza?</p>
+        <div class="dialog-buttons">
+            <button id="confirm-yes">Sim</button>
+            <button id="confirm-no">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function showCustomDialog(message, onConfirm) {
+    document.getElementById('dialog-message').textContent = message;
+    document.getElementById('dialog-overlay').style.display = 'block';
+    document.getElementById('custom-dialog').style.display = 'block';
+
+    const yesBtn = document.getElementById('confirm-yes');
+    const noBtn = document.getElementById('confirm-no');
+
+    yesBtn.onclick = () => {
+        closeDialog();
+        onConfirm();
+    };
+    noBtn.onclick = closeDialog;
+}
+
+function closeDialog() {
+    document.getElementById('dialog-overlay').style.display = 'none';
+    document.getElementById('custom-dialog').style.display = 'none';
+}
+
+function confirmarEnvio() {
+    showCustomDialog("Deseja realmente salvar este usuário?", () => {
+        document.querySelector("form").submit();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toast = document.getElementById("toast");
+    if (toast.textContent.trim() !== "") {
+        toast.classList.remove("toast-hidden");
+        toast.classList.add("toast-show");
+        setTimeout(() => {
+            toast.classList.remove("toast-show");
+            toast.classList.add("toast-hidden");
+        }, 3000);
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Relatório</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${update.id == null ? 'Novo Relatório' : 'Editar Relatório'}"></h1>
+
+    <form th:action="@{/updates/save}" th:object="${update}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <label>ID do Usuário:</label>
+        <input type="text" th:field="*{user.id}"/>
+        <span class="error" th:if="${#fields.hasErrors('user.id')}" th:errors="*{user.id}"></span>
+
+        <label>ID da Moto:</label>
+        <input type="text" th:field="*{motorcycle.id}"></input>
+        <span class="error" th:if="${#fields.hasErrors('motorcycle.id')}" th:errors="*{motorcycle.id}"></span>
+
+        <label>Data de Criação:</label>
+        <input type="date" th:field="*{updateDate}"/>
+        <span class="error" th:if="${#fields.hasErrors('updateDate')}" th:errors="*{updateDate}"></span>
+
+
+        <label>Mensagem:</label>
+        <input type="text" th:field="*{updateMessage}"/>
+        <span class="error" th:if="${#fields.hasErrors('updateMessage')}" th:errors="*{updateMessage}"></span>
+
+        <div>
+            <button type="button" onclick="confirmarEnvio()">Salvar</button>
+            <a th:href="@{/updates}">Voltar</a>
+        </div>
+    </form>
+</div>
+
+<div id="toast" class="toast-hidden" th:text="${param.success} ?: ''"></div>
+
+<div id="dialog-overlay" style="display:none;"></div>
+<div id="custom-dialog" style="display:none;">
+    <div class="dialog-content">
+        <p id="dialog-message">Você tem certeza?</p>
+        <div class="dialog-buttons">
+            <button id="confirm-yes">Sim</button>
+            <button id="confirm-no">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+function showCustomDialog(message, onConfirm) {
+    document.getElementById('dialog-message').textContent = message;
+    document.getElementById('dialog-overlay').style.display = 'block';
+    document.getElementById('custom-dialog').style.display = 'block';
+
+    const yesBtn = document.getElementById('confirm-yes');
+    const noBtn = document.getElementById('confirm-no');
+
+    yesBtn.onclick = () => {
+        closeDialog();
+        onConfirm();
+    };
+    noBtn.onclick = closeDialog;
+}
+
+function closeDialog() {
+    document.getElementById('dialog-overlay').style.display = 'none';
+    document.getElementById('custom-dialog').style.display = 'none';
+}
+
+function confirmarEnvio() {
+    showCustomDialog("Deseja realmente salvar este Relatório?", () => {
+        document.querySelector("form").submit();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toast = document.getElementById("toast");
+    if (toast.textContent.trim() !== "") {
+        toast.classList.remove("toast-hidden");
+        toast.classList.add("toast-show");
+        setTimeout(() => {
+            toast.classList.remove("toast-show");
+            toast.classList.add("toast-hidden");
+        }, 3000);
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Visualizar Usuário</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Usuário #[[${user.id}]]</h1>
+
+    <dl>
+        <dt>RM:</dt>
+        <dd th:text="${user.rm}"></dd>
+
+        <dt>Nome:</dt>
+        <dd th:text="${user.name}"></dd>
+
+        <dt>Senha:</dt>
+        <dd th:text="${user.password}"></dd>
+    </dl>
+
+    <div class="action-buttons">
+        <a th:href="@{/users}">⬅ Voltar</a>
+        <a th:href="@{|/users/edit/${user.id}|}">✏ Editar</a>
+        <a th:href="@{|/users/delete/${user.id}|}" data-confirm="Deseja realmente apagar este usuário?">🗑 Excluir</a>
+    </div>
+</div>
+
+<div id="toast" class="toast-hidden" th:text="${param.success} ?: ''"></div>
+
+<div id="dialog-overlay" style="display:none;"></div>
+<div id="custom-dialog" style="display:none;">
+    <div class="dialog-content">
+        <p id="dialog-message">Você tem certeza?</p>
+        <div class="dialog-buttons">
+            <button id="confirm-yes">Sim</button>
+            <button id="confirm-no">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showCustomDialog(message, onConfirm) {
+        document.getElementById('dialog-message').textContent = message;
+        document.getElementById('dialog-overlay').style.display = 'block';
+        document.getElementById('custom-dialog').style.display = 'block';
+
+        const yesBtn = document.getElementById('confirm-yes');
+        const noBtn = document.getElementById('confirm-no');
+
+        yesBtn.onclick = () => { closeDialog(); onConfirm(); };
+        noBtn.onclick = closeDialog;
+    }
+
+    function closeDialog() {
+        document.getElementById('dialog-overlay').style.display = 'none';
+        document.getElementById('custom-dialog').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[data-confirm]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const msg = this.getAttribute('data-confirm');
+                showCustomDialog(msg, () => window.location.href = href);
+            });
+        });
+    });
+</script>
+</body>
+</html>

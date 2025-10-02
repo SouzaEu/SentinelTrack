@@ -1,0 +1,239 @@
+/* Reset básico e fontes */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(to right, #e3f2fd, #fff);
+  color: #212121;
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+/* Containers */
+.container {
+  max-width: 720px;
+  margin: auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos */
+h1, h2 {
+  margin-bottom: 1rem;
+  color: #0d47a1;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Tabela estilizada */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 0.5rem 0.75rem;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background: #1976d2;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+tr:hover {
+  background-color: #f1f8ff;
+  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Botões */
+a, button {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  margin: 0.25rem 0.5rem 0.5rem 0;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(145deg, #2196f3, #1976d2);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+a:hover, button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(25, 118, 210, 0.4);
+}
+
+/* Formulários */
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+  outline: none;
+}
+
+/* Mensagens de erro */
+span.error {
+  color: #d32f2f;
+  font-size: 0.9rem;
+}
+
+/* Dialog Overlay and Dialog */
+#dialog-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+#custom-dialog {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+.dialog-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.dialog-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.dialog-buttons button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(to right, #2196f3, #1976d2);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dialog-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes slideIn {
+  from { transform: translate(-50%, -60%); opacity: 0; }
+  to   { transform: translate(-50%, -50%); opacity: 1; }
+}
+
+/* Toast message */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #4caf50;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  box-shadow: 0 8px 16px rgba(76, 175, 80, 0.4);
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.4s ease;
+  z-index: 2000;
+}
+
+.toast-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  th, td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  a, button {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
+.action-buttons {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+
+.action-buttons a {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  min-width: auto;
+  white-space: nowrap;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+

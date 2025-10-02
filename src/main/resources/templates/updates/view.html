@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Visualizar Update</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Relatório [[${update.id}]]</h1>
+
+    <dl>
+        <dt>Nome do Usuário:</dt>
+        <dd th:text="${update.user.name}"></dd>
+
+        <dt>Placa da Moto:</dt>
+        <dd th:text="${update.motorcycle.plate}"></dd>
+
+        <dt>Data do Update:</dt>
+        <dd th:text="${update.updateDate}"></dd>
+
+        <dt>Mensagem:</dt>
+        <dd th:text="${update.updateMessage}"></dd>
+    </dl>
+
+    <div class="action-buttons">
+        <a th:href="@{/updates}">⬅ Voltar</a>
+        <a th:href="@{|/updates/edit/${update.id}|}">✏ Editar</a>
+        <a th:href="@{|/updates/delete/${update.id}|}" data-confirm="Deseja realmente apagar este relatório?">🗑 Excluir</a>
+    </div>
+</div>
+
+<div id="toast" class="toast-hidden" th:text="${param.success} ?: ''"></div>
+
+<div id="dialog-overlay" style="display:none;"></div>
+<div id="custom-dialog" style="display:none;">
+    <div class="dialog-content">
+        <p id="dialog-message">Você tem certeza?</p>
+        <div class="dialog-buttons">
+            <button id="confirm-yes">Sim</button>
+            <button id="confirm-no">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showCustomDialog(message, onConfirm) {
+        document.getElementById('dialog-message').textContent = message;
+        document.getElementById('dialog-overlay').style.display = 'block';
+        document.getElementById('custom-dialog').style.display = 'block';
+
+        const yesBtn = document.getElementById('confirm-yes');
+        const noBtn = document.getElementById('confirm-no');
+
+        yesBtn.onclick = () => { closeDialog(); onConfirm(); };
+        noBtn.onclick = closeDialog;
+    }
+
+    function closeDialog() {
+        document.getElementById('dialog-overlay').style.display = 'none';
+        document.getElementById('custom-dialog').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[data-confirm]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const msg = this.getAttribute('data-confirm');
+                showCustomDialog(msg, () => window.location.href = href);
+            });
+        });
+    });
+</script>
+</body>
+</html>

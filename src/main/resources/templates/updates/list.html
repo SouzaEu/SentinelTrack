@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Updates</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Relatório</h1>
+    <a th:href="@{/updates/new}">Novo Relatório</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome do Usuário</th>
+            <th>Placa da Moto</th>
+            <th>Data do Update</th>
+            <th>Mensagem</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="update : ${updates}">
+            <td th:text="${update.user.name}"></td>
+            <td th:text="${update.motorcycle.plate}"></td>
+            <td th:text="${update.updateDate}"></td>
+            <td th:text="${update.updateMessage}"></td>
+            <td>
+                <div class="action-buttons">
+                    <a th:href="@{|/updates/view/${update.id}|}">👁️</a>
+                    <a th:href="@{|/updates/edit/${update.id}|}">✏️</a>
+                    <a th:href="@{|/updates/delete/${update.id}|}" data-confirm="Deseja realmente apagar este relatório?">🗑️</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="toast" class="toast-hidden" th:text="${param.success} ?: ''"></div>
+<div id="dialog-overlay" style="display:none;"></div>
+<div id="custom-dialog" style="display:none;">
+    <div class="dialog-content">
+        <p id="dialog-message">Você tem certeza?</p>
+        <div class="dialog-buttons">
+            <button id="confirm-yes">Sim</button>
+            <button id="confirm-no">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showCustomDialog(message, onConfirm) {
+        document.getElementById('dialog-message').textContent = message;
+        document.getElementById('dialog-overlay').style.display = 'block';
+        document.getElementById('custom-dialog').style.display = 'block';
+
+        const yesBtn = document.getElementById('confirm-yes');
+        const noBtn = document.getElementById('confirm-no');
+
+        yesBtn.onclick = () => { closeDialog(); onConfirm(); };
+        noBtn.onclick = closeDialog;
+    }
+
+    function closeDialog() {
+        document.getElementById('dialog-overlay').style.display = 'none';
+        document.getElementById('custom-dialog').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[data-confirm]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const msg = this.getAttribute('data-confirm');
+                showCustomDialog(msg, () => window.location.href = href);
+            });
+        });
+
+        const toast = document.getElementById("toast");
+        if (toast.textContent.trim() !== "") {
+            toast.classList.remove("toast-hidden");
+            toast.classList.add("toast-show");
+            setTimeout(() => {
+                toast.classList.remove("toast-show");
+                toast.classList.add("toast-hidden");
+            }, 3000);
+        }
+    });
+</script>
+</body>
+</html>

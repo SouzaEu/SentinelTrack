@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.User">
+        <expiry>
+            <ttl unit="minutes">10</ttl> <!-- Tempo de vida de 10 minutos -->
+        </expiry>
+        <resources>
+            <heap>500</heap> <!-- Máximo 500 usuários no cache -->
+        </resources>
+    </cache>
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.Role">
+        <expiry>
+            <ttl unit="minutes">15</ttl> <!-- Roles mudam pouco -->
+        </expiry>
+        <resources>
+            <heap>200</heap>
+        </resources>
+    </cache>
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.Profile">
+        <expiry>
+            <ttl unit="minutes">10</ttl>
+        </expiry>
+        <resources>
+            <heap>500</heap>
+        </resources>
+    </cache>
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.Post">
+        <expiry>
+            <ttl unit="minutes">5</ttl> <!-- Posts podem mudar mais rápido -->
+        </expiry>
+        <resources>
+            <heap>1000</heap>
+        </resources>
+    </cache>
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.Tag">
+        <expiry>
+            <ttl unit="minutes">20</ttl> <!-- Tags são mais estáveis -->
+        </expiry>
+        <resources>
+            <heap>300</heap>
+        </resources>
+    </cache>
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.Order">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <resources>
+            <heap>500</heap>
+        </resources>
+    </cache>
+
+    <cache alias="br.com.empresa.springCrud.AppExample.domainmodel.OrderItem">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <resources>
+            <heap>1000</heap>
+        </resources>
+    </cache>
+
+    <!-- Cache especial para queries do Hibernate -->
+    <cache alias="org.hibernate.cache.spi.UpdateTimestampsCache">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <resources>
+            <heap>500</heap>
+        </resources>
+    </cache>
+
+    <cache alias="org.hibernate.cache.spi.StandardQueryCache">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <resources>
+            <heap>500</heap>
+        </resources>
+    </cache>
+
+</config>
